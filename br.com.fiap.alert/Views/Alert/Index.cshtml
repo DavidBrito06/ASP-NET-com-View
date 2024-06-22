@@ -1,0 +1,61 @@
+﻿@model IEnumerable<AlertModel>
+<h1>Alert</h1>
+@if (!string.IsNullOrEmpty((String)TempData["mensagemSucesso"]))
+{
+    <div class="alert alert-warning" role="alert">@TempData["mensagemSucesso"]</div>
+ }
+
+@if (!string.IsNullOrEmpty((String)TempData["mensagemSucesso2"]))
+{
+    <div class="alert alert-warning" role="alert">@TempData["mensagemSucesso2"]</div>
+}
+<p>
+    <!-- uso de TagHelpers para definir o Controller e a Action -->
+    <a asp-controller="Alert" asp-action="Create">New Alert</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>AlertId</th>
+            <th>TypeAlert</th>
+            <th>Message</th>
+            <th>Coords</th>
+            <th>Author</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <label>@item.AlertId</label>
+                </td>
+                <td>
+                    <label>@item.TypeAlert</label>
+                </td>
+                <td>
+                    <label>@item.Message</label>
+                </td>
+                <td>
+                    <label>@item.Coords</label>
+                </td>
+                <td>
+                    <label>@item.Author</label>
+                </td>
+              
+                <td>
+                    <!-- asp-route-id é usado para informar o Id do Item selecionado. -->
+                    <a asp-controller="Alert"
+                       asp-action="Edit"
+                       asp-route-id="@item.AlertId">Editar</a>
+                    <a asp-controller="Alert"
+                       asp-action="Detail"
+                       asp-route-id="@item.AlertId">Consultar</a>
+                    <a asp-controller="Alert"
+                       asp-action="Delete"
+                       asp-route-id="@item.AlertId">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
