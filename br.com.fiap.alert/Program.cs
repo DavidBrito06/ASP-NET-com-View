@@ -1,4 +1,7 @@
+using AutoMapper;
 using br.com.fiap.alert.Data.Contexts;
+using br.com.fiap.alert.Models;
+using br.com.fiap.alert.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +12,23 @@ var connectionString = builder.Configuration.GetConnectionString("DatabaseConnec
 builder.Services.AddDbContext<DatabaseContext>(
     opt => opt.UseOracle(connectionString).EnableSensitiveDataLogging(true)
 );
+#endregion
+
+#region AutoMapper
+var mapperConfig = new AutoMapper.MapperConfiguration(c =>
+{
+    c.AllowNullCollections = true;
+    c.AllowNullDestinationValues = true;
+
+    c.CreateMap<AlertModel,AlertCreateViewModel>();
+    c.CreateMap<AlertCreateViewModel,AlertModel>();
+}
+    
+ );
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+
 #endregion
 
 // Add services to the container.

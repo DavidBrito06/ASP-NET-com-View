@@ -1,15 +1,20 @@
-﻿using br.com.fiap.alert.Data.Contexts;
+﻿
+using AutoMapper;
+using br.com.fiap.alert.Data.Contexts;
 using br.com.fiap.alert.Models;
+using br.com.fiap.alert.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 namespace br.com.fiap.alert.Controllers
 {
     public class AlertController : Controller
     {
         private readonly DatabaseContext _databaseContext;
+        private readonly IMapper _mapper;
        
-        public AlertController(DatabaseContext databaseContext) { 
+        public AlertController(DatabaseContext databaseContext,IMapper mapper) { 
           
           _databaseContext = databaseContext;
+            _mapper = mapper;   
          
         }
         public IActionResult Index()
@@ -22,18 +27,28 @@ namespace br.com.fiap.alert.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-           
+           var viewModel = new AlertCreateViewModel();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(AlertModel alertModel)
+        public IActionResult Create(AlertCreateViewModel viewModel)
         {
-            _databaseContext.Alerts.Add(alertModel);
-            _databaseContext.SaveChanges();
-            Console.WriteLine("Alert registered");
-            TempData["mensagemSucesso"] = "Alert registered";
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                var alertModel = _mapper.Map<AlertModel>(viewModel);
+               
+                _databaseContext.Alerts.Add(alertModel);
+                _databaseContext.SaveChanges();
+                Console.WriteLine("Alert registered");
+                TempData["mensagemSucesso"] = "Alert registered";
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(viewModel);
+            }
+            
         }
 
 
