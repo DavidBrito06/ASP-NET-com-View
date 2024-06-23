@@ -3,6 +3,7 @@ using AutoMapper;
 using br.com.fiap.alert.Data.Contexts;
 using br.com.fiap.alert.Models;
 using br.com.fiap.alert.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace br.com.fiap.alert.Controllers
 {
@@ -25,6 +26,7 @@ namespace br.com.fiap.alert.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
            var viewModel = new AlertCreateViewModel();
@@ -32,6 +34,7 @@ namespace br.com.fiap.alert.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(AlertCreateViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -53,6 +56,7 @@ namespace br.com.fiap.alert.Controllers
 
 
         [HttpGet]
+        [Authorize]
         public IActionResult Edit(int id)
         {
 
@@ -82,6 +86,7 @@ namespace br.com.fiap.alert.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             // Simulando a busca no banco de dados 
