@@ -40,8 +40,8 @@ namespace br.com.fiap.alert.Controllers
                
                 _databaseContext.Alerts.Add(alertModel);
                 _databaseContext.SaveChanges();
-                Console.WriteLine("Alert registered");
-                TempData["mensagemSucesso"] = "Alert registered";
+                Console.WriteLine("Alert registrado");
+                TempData["mensagemSucesso"] = "Alert registrado";
                 return RedirectToAction(nameof(Index));
             }
             else
@@ -67,7 +67,7 @@ namespace br.com.fiap.alert.Controllers
         {
             _databaseContext.Alerts.Update(alertModel);
             _databaseContext.SaveChanges(); 
-            TempData["mensagemSucesso2"] = "Alert consultado com sucesso";
+            TempData["mensagemSucesso2"] = "Alert editado com sucesso";
             return RedirectToAction(nameof(Index));
         }
 
