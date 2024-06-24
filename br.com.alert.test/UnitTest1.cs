@@ -1,7 +1,5 @@
 namespace br.com.alert.test
 {
-    namespace Fiap.Web.Alunos.Tests
-    {
         public class UnitTest1
         {
             [Fact]
@@ -20,5 +18,3 @@ namespace br.com.alert.test
         }
     }
 
-}
-}
