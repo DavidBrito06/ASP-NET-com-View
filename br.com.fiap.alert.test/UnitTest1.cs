@@ -1,7 +1,5 @@
-namespace br.com.alert.test
+namespace br.com.fiap.alert.test1
 {
-    namespace Fiap.Web.Alunos.Tests
-    {
         public class UnitTest1
         {
             [Fact]
@@ -18,7 +16,4 @@ namespace br.com.alert.test
                 Assert.True(ehMaiorDeIdade);
             }
         }
-    }
-
-}
 }

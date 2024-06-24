@@ -5,7 +5,7 @@ namespace br.com.fiap.alert.Data.Contexts
 {
     public class DatabaseContext : DbContext
     {
-        public DbSet<AlertModel> Alerts { get; set; }
+        public virtual DbSet<AlertModel> Alerts { get; set; }
         public DatabaseContext(DbContextOptions options) : base(options)
         {
         }
