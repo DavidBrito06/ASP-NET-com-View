@@ -5,7 +5,8 @@ namespace br.com.fiap.alert.Data.Contexts
 {
     public class DatabaseContext : DbContext
     {
-        public virtual DbSet<AlertModel> Alerts { get; set; }
+        public DbSet<AlertModel> Alerts { get; set; }
+        public DbSet<UserModel> Users { get; set; }
         public DatabaseContext(DbContextOptions options) : base(options)
         {
         }
@@ -27,6 +28,16 @@ namespace br.com.fiap.alert.Data.Contexts
 
                 //Update-Database para efetivar a migracao
 
+            }
+            );
+
+            modelBuilder.Entity<UserModel>(entity =>
+            {
+                entity.ToTable("TB_USER");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Name);
+                entity.Property(e => e.Email);
+                entity.Property(e => e.PasswordHash);
             }
             );
         }
