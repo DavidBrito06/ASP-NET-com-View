@@ -25,16 +25,16 @@ namespace br.com.fiap.alert.Controllers
             var viewModel = new AlertPaginacaoViewModel
             {
                 Alerts = Alerts,
-                CurrentPage = 1, // Define a página atual como 1 (ou ajuste conforme necessário)
+                CurrentPage = 1,
                 PageSize = 10 // Define o tamanho da página (ou ajuste conforme necessário)
             };
 
             // Calcula o número total de páginas
             viewModel.TotalPages = (int)Math.Ceiling(totalAlerts / (double)viewModel.PageSize);
 
-            viewModel.SetPaginationValues(totalAlerts); // Define os valores de paginação
+            viewModel.SetPaginationValues(totalAlerts); 
 
-            return View("Index", viewModel); // Retorna a view Index com o viewModel correto
+            return View("Index", viewModel);
         }
 
         [HttpGet]
@@ -59,12 +59,10 @@ namespace br.com.fiap.alert.Controllers
                 PageSize = tamanhoPagina
             };
 
-            // Calcular TotalPages
             viewModel.TotalPages = (int)Math.Ceiling(totalAlerts / (double)tamanhoPagina);
-
             viewModel.SetPaginationValues(totalAlerts);
 
-            return View(viewModel);
+            return View("Index", viewModel); // Especifica a view "Index"
         }
 
 

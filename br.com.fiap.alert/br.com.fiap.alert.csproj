@@ -15,6 +15,7 @@
     <Compile Remove="Data\NewFolder3\**" />
     <Compile Remove="Data\NewFolder4\**" />
     <Compile Remove="Data\NewFolder\**" />
+    <Compile Remove="Data\Repository\**" />
     <Compile Remove="ViewModel\NewFolder1\**" />
     <Compile Remove="ViewModel\NewFolder\**" />
     <Content Remove="Controllers\NewFolder\**" />
@@ -23,6 +24,7 @@
     <Content Remove="Data\NewFolder3\**" />
     <Content Remove="Data\NewFolder4\**" />
     <Content Remove="Data\NewFolder\**" />
+    <Content Remove="Data\Repository\**" />
     <Content Remove="ViewModel\NewFolder1\**" />
     <Content Remove="ViewModel\NewFolder\**" />
     <EmbeddedResource Remove="Controllers\NewFolder\**" />
@@ -31,6 +33,7 @@
     <EmbeddedResource Remove="Data\NewFolder3\**" />
     <EmbeddedResource Remove="Data\NewFolder4\**" />
     <EmbeddedResource Remove="Data\NewFolder\**" />
+    <EmbeddedResource Remove="Data\Repository\**" />
     <EmbeddedResource Remove="ViewModel\NewFolder1\**" />
     <EmbeddedResource Remove="ViewModel\NewFolder\**" />
     <None Remove="Controllers\NewFolder\**" />
@@ -39,6 +42,7 @@
     <None Remove="Data\NewFolder3\**" />
     <None Remove="Data\NewFolder4\**" />
     <None Remove="Data\NewFolder\**" />
+    <None Remove="Data\Repository\**" />
     <None Remove="ViewModel\NewFolder1\**" />
     <None Remove="ViewModel\NewFolder\**" />
   </ItemGroup>
@@ -56,10 +60,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
     <PackageReference Include="Oracle.EntityFrameworkCore" Version="8.23.40" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\Repository\" />
   </ItemGroup>
 
 </Project>
