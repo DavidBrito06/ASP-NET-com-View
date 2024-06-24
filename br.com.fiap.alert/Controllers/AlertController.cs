@@ -19,9 +19,22 @@ namespace br.com.fiap.alert.Controllers
         }
         public IActionResult Index()
         {
+            var totalAlerts = _databaseContext.Alerts.Count();
             var Alerts = _databaseContext.Alerts.ToList();
-            
-            return View(Alerts);
+
+            var viewModel = new AlertPaginacaoViewModel
+            {
+                Alerts = Alerts,
+                CurrentPage = 1, // Define a página atual como 1 (ou ajuste conforme necessário)
+                PageSize = 10 // Define o tamanho da página (ou ajuste conforme necessário)
+            };
+
+            // Calcula o número total de páginas
+            viewModel.TotalPages = (int)Math.Ceiling(totalAlerts / (double)viewModel.PageSize);
+
+            viewModel.SetPaginationValues(totalAlerts); // Define os valores de paginação
+
+            return View("Index", viewModel); // Retorna a view Index com o viewModel correto
         }
 
         [HttpGet]
@@ -30,6 +43,30 @@ namespace br.com.fiap.alert.Controllers
            var viewModel = new AlertCreateViewModel();
             return View();
         }
+
+        public IActionResult IndexPaginated(int pagina = 1, int tamanhoPagina = 10)
+        {
+            var totalAlerts = _databaseContext.Alerts.Count();
+            var alerts = _databaseContext.Alerts
+                                .Skip((pagina - 1) * tamanhoPagina)
+                                .Take(tamanhoPagina)
+                                .ToList();
+
+            var viewModel = new AlertPaginacaoViewModel
+            {
+                Alerts = alerts,
+                CurrentPage = pagina,
+                PageSize = tamanhoPagina
+            };
+
+            // Calcular TotalPages
+            viewModel.TotalPages = (int)Math.Ceiling(totalAlerts / (double)tamanhoPagina);
+
+            viewModel.SetPaginationValues(totalAlerts);
+
+            return View(viewModel);
+        }
+
 
         [HttpPost]
         public IActionResult Create(AlertCreateViewModel viewModel)
