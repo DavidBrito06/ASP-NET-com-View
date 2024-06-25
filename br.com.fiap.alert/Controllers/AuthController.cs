@@ -39,7 +39,14 @@ namespace br.com.fiap.alert.Controllers
             byte[] secret = Encoding.ASCII.GetBytes("f+ujXAKHk00L5jlMXo2XhAWawsOoihNP1OiAM25lLSO57+X7uBMQgwPju6yzyePi");
             var securityKey = new SymmetricSecurityKey(secret);
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
+            
+            /*remover ao tirar o nome*/
+            var subject = new ClaimsIdentity(new Claim[]
+            {
+                user.Name != null ? new Claim(ClaimTypes.Name, user.Name) : new Claim(ClaimTypes.Name, "DeuNomeNullRapaziada"), 
+                new Claim(ClaimTypes.Hash, Guid.NewGuid().ToString())
+            });
+            
             JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
 
             SecurityTokenDescriptor securityTokenDescriptor = new SecurityTokenDescriptor()

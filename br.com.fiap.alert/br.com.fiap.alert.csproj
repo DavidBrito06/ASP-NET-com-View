@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -7,7 +6,6 @@
     <UserSecretsId>21108b61-f9ef-4d85-8ff3-a65966b4e34c</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Controllers\NewFolder\**" />
     <Compile Remove="Data\NewFolder1\**" />
@@ -46,7 +44,6 @@
     <None Remove="ViewModel\NewFolder1\**" />
     <None Remove="ViewModel\NewFolder\**" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.5" />
@@ -63,5 +60,4 @@
     <PackageReference Include="Oracle.EntityFrameworkCore" Version="8.23.40" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
-
 </Project>

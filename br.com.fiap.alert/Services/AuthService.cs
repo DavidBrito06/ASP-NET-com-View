@@ -17,4 +17,3 @@ namespace br.com.fiap.alert.Services
         }
     }
 }
-}

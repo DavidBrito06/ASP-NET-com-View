@@ -95,19 +95,31 @@ namespace br.com.fiap.alert.Controllers
         public IActionResult Edit(int id)
         {
 
-
             var AlertConsultado =
                 _databaseContext.Alerts.Find(id);
             // Retornando o cliente consultado para a View
             return View(AlertConsultado);
         }
-        [HttpPost]
-        public IActionResult Edit(AlertModel alertModel)
+
+        // [HttpPut("{id}")]
+        // [Authorize]
+        // public IActionResult Edit(AlertModel alertModel)
+        // {
+        //     _databaseContext.Alerts.Update(alertModel);
+        //     _databaseContext.SaveChanges(); 
+        //     TempData["mensagemSucesso2"] = "Alert editado com sucesso";
+        //     return RedirectToAction(nameof(Index));
+        // }
+        [HttpPut("{id}")]
+        [Authorize]
+        public IActionResult Edit(int id, [FromBody] AlertUpdateViewModel viewModel)
         {
-            _databaseContext.Alerts.Update(alertModel);
-            _databaseContext.SaveChanges(); 
-            TempData["mensagemSucesso2"] = "Alert editado com sucesso";
-            return RedirectToAction(nameof(Index));
+            var existingAlert = _databaseContext.Alerts.Find(id);
+            if (existingAlert == null)
+                return NotFound();
+            _mapper.Map(viewModel, existingAlert);
+            _databaseContext.Attach(existingAlert);
+            return NoContent();
         }
 
         [HttpGet]
