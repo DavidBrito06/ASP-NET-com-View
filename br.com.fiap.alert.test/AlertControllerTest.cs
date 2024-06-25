@@ -33,7 +33,7 @@ namespace br.com.fiap.alert.test
 
             _mockContext.Setup(m => m.Alerts).Returns(_mockSet);
 
-            _alertControler = new AlertController(_mockContext.Object, _mapper);
+            _alertControler = new AlertController(_mockContext.Object,_mapper);
         }
 
         private DbSet<AlertModel> MockDbSet()
@@ -67,17 +67,28 @@ namespace br.com.fiap.alert.test
         }
 
         [Fact]
-        public void Index_ReturnsViewWithClients()
+        public void Index_ReturnsViewWithAlerts()
         {
-            // Given
+
             var result = _alertControler.Index();
-            // When
             var viewResult = Assert.IsType<ViewResult>(result);
-            //var model = Assert.IsAssignableFrom<AlertModel>(viewResult.Model);
             var model = Assert.IsAssignableFrom<IEnumerable<AlertModel>>(viewResult.Model);
-            // Then
-             Assert.Equal(13, model.Count());
+            Assert.Equal(13, model.Count());
         }
+
+        [Fact]
+        public void Index_ReturnsViewWithoutAlerts()
+        {
+
+            _mockSet.RemoveRange(_mockSet.ToList());
+            _mockContext.Setup( m=> m.Alerts).Returns(_mockSet);
+            var result = _alertControler.Index();
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<AlertModel>>(viewResult.Model);
+            Assert.Empty(model);
+        }
+
+
     }
 
 }
